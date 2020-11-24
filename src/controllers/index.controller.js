@@ -1,4 +1,4 @@
-const { pool, Pool } = require('pg');
+const { Pool } = require('pg');
 const { json } = require('express');
 
 const pool = new Pool({
@@ -12,14 +12,23 @@ const pool = new Pool({
 
 // PA registrar_clientes
 
+const getclientes = async (req, res) => {
+    const response = await pool.query('SELECT * FROM clientes');
+    return res.status(200).json(response.rows);
+};
+
 const registrar_cliente = async(req, res) => {
-    const {nombre, apellido, telefono, email, direccion, pais} = req.body;
+    const { nombre, apellido, telefono, email, direccion, pais} = req.body;
 
-    const response = await pool.query('SELECT registrar_cliente($1, $2, $3, $4, $4, $5)', 
+    const response = await pool.query('SELECT registrar_cliente($1, $2, $3, $4, $5, $6)', 
     [nombre, apellido, telefono, email, direccion, pais]);
+    res.status(200).json();
+};
 
-    return res.status().json({
-        message: '', 
-        body: {nombre, apellido, email} 
-    });
+
+module.exports = {
+
+    getclientes,
+    registrar_cliente
+    
 };
