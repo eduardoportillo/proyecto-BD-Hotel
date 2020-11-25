@@ -21,7 +21,7 @@ const registrar_cliente = async(req, res) => {
     const { nombre, apellido, telefono, email, direccion, pais} = req.body;
     const response = await pool.query('SELECT registrar_cliente($1, $2, $3, $4, $5, $6)', 
     [nombre, apellido, telefono, email, direccion, pais]);
-    res.status(200).json();
+    res.status(200);
 };
 
 
