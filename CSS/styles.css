@@ -1,0 +1,24 @@
+body {
+    background-color: #F5DB00;
+}
+
+header{
+    padding: 0px;
+    margin: 0px;
+    background-color: #C4C4C4;
+}
+
+#div_regristro_cliente{
+
+    border-radius: 30px;
+    margin: 30px;
+    padding: 10px;
+    background-color: #C4C4C4;
+
+
+}
+
+input{
+
+    border-radius: 5px;
+}
