@@ -25,6 +25,8 @@ const registrar_cliente = async(req, res) => {
 };
 
 
+
+
 module.exports = {
 
     getclientes,
