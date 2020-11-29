@@ -11,11 +11,11 @@
     
     <header>
       <div>
-        <a href="http://127.0.0.1:3000/"><img src="../resources/img/habbo.svg" alt="habbo" width="10%" height="10%"></a>
+        <a href="/"><img src="../resources/img/habbo.svg" alt="habbo" width="10%" height="10%"></a>
       </div>
     </header>
     <div id="div_interfaz">
-      <form action="http://localhost:3000/registrar_cliente" method="post">
+      <form action="/registrar_cliente" method="post">
         <h1>Registrar Cliente</h1>
 
         <label for="nombre">Nombre</label>
@@ -100,6 +100,7 @@
                   <td><%= date_clientes[i].email %></td>
                   <td><%= date_clientes[i].direccion %></td>
                   <td><%= date_clientes[i].pais %></td>
+                  <td><a href="/delete/<%= date_clientes[i].cliente_id %>">Delete</a></td>
                 </tr>
               <% } %>
             <% } %>

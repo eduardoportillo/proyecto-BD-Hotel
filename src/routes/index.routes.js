@@ -1,10 +1,11 @@
 const { Router } = require('express');
 const router = Router();
 
-const { index, getclientes, registrar_cliente} = require('../controllers/index.controller');
+const { index, getClientes, registrarCliente, deleteCliente} = require('../controllers/index.controller');
 
 router.get('/', index);
-router.get('/cliente', getclientes);
-router.post('/registrar_cliente', registrar_cliente);
+router.get('/cliente', getClientes);
+router.post('/registrar_cliente', registrarCliente);
+router.get('/delete/:id', deleteCliente);
 
 module.exports = router;

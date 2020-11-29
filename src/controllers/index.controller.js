@@ -13,7 +13,7 @@ const index = async (req, res) => {
 };
 
 // metodos para tabla clientes
-const getclientes = async (req, res) => {
+const getClientes = async (req, res) => {
     const query = 'SELECT * FROM clientes';
     const response = pool.query(query, (error, result) => {
         if (error) {
@@ -23,15 +23,23 @@ const getclientes = async (req, res) => {
     });
 };
 
-const registrar_cliente = async(req, res) => {
+const registrarCliente = async(req, res) => {
     const { nombre, apellido, telefono, email, direccion, pais} = req.body;
-    const response = await pool.query('SELECT registrar_cliente($1, $2, $3, $4, $5, $6)', 
+    const response = await pool.query('SELECT registrarCliente($1, $2, $3, $4, $5, $6)', 
     [nombre, apellido, telefono, email, direccion, pais]);
+    res.redirect('/cliente');
+};
+
+const deleteCliente = async (req, res) => {
+    // const id = parseInt(req.params.id);
+    const { id } = req.params;
+    await pool.query('DELETE FROM clientes where cliente_id = $1', [id]);
     res.redirect('/cliente');
 };
 
 module.exports = {
     index,
-    getclientes,
-    registrar_cliente
+    getClientes,
+    registrarCliente,
+    deleteCliente
 };
