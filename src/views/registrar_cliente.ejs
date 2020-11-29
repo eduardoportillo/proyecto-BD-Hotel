@@ -69,8 +69,11 @@
         />
 
         <datalist id="paises-list">
-          <option value="Bolivia"></option>
-          <option value="Peru"></option>
+          <% if (data_paises) { %>
+            <% for(var i = 0; i < data_paises.length; i++) { %>
+                <option value=<%= data_paises[i].pais %>></option>
+            <% } %>
+        <% } %>
         </datalist>
 
         <br />

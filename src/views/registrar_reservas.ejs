@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registrar Cliente</title>
+    <link rel="stylesheet" href="../CSS/styles.css" type="text/css">
+    <script src="https://kit.fontawesome.com/51f0d0946e.js" crossorigin="anonymous"></script>
+  </head>
+  
+  <body>
+    
+    <header>
+      <div>
+        <a href="/"><img src="../resources/img/habbo.svg" alt="habbo" width="10%" height="10%"></a>
+      </div>
+    </header>
+
+    <div id="div_interfaz">
+
+      <form action="/reserva_habitaciones" method="post">
+        <h1>Reservar Habitacion</h1>
+
+        <label for="cliente">cliente</label>
+        
+        <datalist id="cliente_id">
+            <% if (data_cliente) { %>
+                <% for(var i = 0; i < data_cliente.length; i++) { %>
+                    <option value=<%= data_cliente[i].cliente_id %>></option>
+                <% } %>
+            <% } %>
+        </datalist>
+
+          
+
+      </form>
+
+      <div>
+
+        <table>
+            <thead>
+              <tr>
+                <th>reserva_id</th>
+                <th>fecha_entrada</th>
+                <th>fecha_salida</th>
+                <th>precio_habitacion</th>
+                <th>cliente_id</th>
+                <th> numero_habitacion</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% if (data_habitaciones) { %>
+                <% for(var i = 0; i < data_habitaciones.length; i++) { %>
+                  <tr>
+                    <td><%= data_habitaciones[i].reserva_id %></td>
+                    <td><%= data_habitaciones[i].fecha_entrada %></td>
+                    <td><%= data_habitaciones[i].fecha_salida %></td>
+                    <td><%= data_habitaciones[i].precio_habitacion %></td>
+                    <td><%= data_habitaciones[i].cliente_id %></td>
+                    <td><%= data_habitaciones[i].numero_habitacion %></td>
+
+                  </tr>
+                <% } %>
+              <% } %>
+            </tbody>
+          </table>
+
+      </div>
+    </div>
+
+  </body>
+</html>
