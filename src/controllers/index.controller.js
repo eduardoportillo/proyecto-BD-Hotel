@@ -54,7 +54,16 @@ const reservaHabitacion = async (req, res) => {
 };
 
 const registrarReservaHabitacion = async (req, res) => {
-    const query = await pool.query('');
+    const { var_cliente_id, var_numero_habitacion, var_fecha_entrada, var_fecha_salida } = req.body;
+    const query = await pool.query('SELECT registrar_reservas_habitaciones($1,$2,$3,$4)', 
+    [var_cliente_id, var_numero_habitacion, var_fecha_entrada, var_fecha_salida]);
+    res.redirect('/reserva_habitaciones');
+};
+
+const deleteReserva = async (req, res) => {
+    const { reserva_id } = req.params;
+    await pool.query('DELETE from reservas_habitaciones	where reserva_id = $1', [reserva_id]);
+    res.redirect('/reserva_habitaciones');
 };
 
 module.exports = {
@@ -63,5 +72,6 @@ module.exports = {
     registrarCliente,
     deleteCliente,
     reservaHabitacion,
-    registrarReservaHabitacion
+    registrarReservaHabitacion,
+    deleteReserva
 };

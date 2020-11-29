@@ -21,8 +21,9 @@
       <form action="/registrar_reserva_habitacion" method="post">
         <h1>Reservar Habitacion</h1>
 
-        <label for="cliente">cliente</label>
-        <input list="cliente_id" name="cliente_id" id="cliente">
+        <label for="cliente">cliente:</label>
+        <br>
+        <input list="cliente_id" name="var_cliente_id" id="cliente">
         <datalist id="cliente_id">
             <% if (data_cliente) { %>
                 <% for(var i = 0; i < data_cliente.length; i++) { %>
@@ -33,8 +34,9 @@
 
         <br>
 
-        <label for="habitacion">habitacion</label>
-        <input list="habitaciones" name="habitaciones" id="habitacion">
+        <label for="habitacion">habitacion:</label>
+        <br>
+        <input list="habitaciones" name=" var_numero_habitacion" id="habitacion">
         <datalist id="habitaciones">
           <% if (data_habitaciones) { %>
             <% for(var i = 0; i < data_habitaciones.length; i++) { %>
@@ -43,7 +45,20 @@
         <% } %>
         </datalist>
 
-          
+        <br>
+
+        <label>Fecha de Entrada</label>
+        <input type="date"  name="var_fecha_entrada">
+
+        <br>
+
+        <label>Fecha de Salida</label>
+        <input type="date"  name="var_fecha_salida">
+
+        <br>
+
+
+        <input type="submit">
 
       </form>
 
@@ -70,6 +85,7 @@
                     <td><%= data_reserva_habitaciones[i].precio_habitacion %></td>
                     <td><%= data_reserva_habitaciones[i].cliente_id %></td>
                     <td><%= data_reserva_habitaciones[i].numero_habitacion %></td>
+                    <td><a href="/delete_reserva_habitacion/<%= data_reserva_habitaciones[i].reserva_id %>" class="button-trash"><i class="fas fa-trash-alt"></i></a></td>
 
                   </tr>
                 <% } %>
