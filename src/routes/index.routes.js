@@ -5,6 +5,6 @@ const { index, getclientes, registrar_cliente} = require('../controllers/index.c
 
 router.get('/', index);
 router.get('/cliente', getclientes);
-router.get('/registrar_cliente', registrar_cliente);
+router.post('/registrar_cliente', registrar_cliente);
 
 module.exports = router;
