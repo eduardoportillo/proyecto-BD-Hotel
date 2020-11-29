@@ -22,11 +22,11 @@
         <h1>Reservar Habitacion</h1>
 
         <label for="cliente">cliente</label>
-        
+        <input list="cliente_id" name="cliente_id" id="cliente">
         <datalist id="cliente_id">
             <% if (data_cliente) { %>
                 <% for(var i = 0; i < data_cliente.length; i++) { %>
-                    <option value=<%= data_cliente[i].cliente_id %>></option>
+                    <option value=<%= data_cliente[i].cliente_id %> <label><%= data_cliente[i].nombre + " " +data_cliente[i].apellido_paterno  %></label> </option>
                 <% } %>
             <% } %>
         </datalist>

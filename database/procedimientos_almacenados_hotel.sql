@@ -13,7 +13,7 @@ END
 $$
 LANGUAGE plpgsql;
 
-select registrar_cliente('chin-no', 'hong', 70207967, 'e@gmail.com', null, 'Nueva Zelanda');
+/* select registrar_cliente('chin-no', 'hong', 70207967, 'e@gmail.com', null, 'Nueva Zelanda'); */
 
 -- validar nombre y apellido
 
@@ -52,7 +52,7 @@ END
 $$
 LANGUAGE plpgsql;
 
-select validar_telefono(1234567890);
+/* select validar_telefono(1234567890); */
 
 -- trigger para insertar codigo de telefono 
 
@@ -80,7 +80,7 @@ CREATE TRIGGER trigger_poner_codigo_telefono
  EXECUTE PROCEDURE trigger_poner_codigo_telefono();
  
  -- validar correo
- CREATE OR REPLACE FUNCTION validateEmail()
+CREATE OR REPLACE FUNCTION validateEmail()
 RETURNS TRIGGER AS $$
 BEGIN
 	IF (new.email !~ '^[A-Za-z0-9._%-]+@[A-Za-z0-9-]+[.][A-Za-z]+$') THEN
@@ -90,7 +90,7 @@ BEGIN
 	END IF;
 END
 $$
-LANGUAGE plpgsql
+LANGUAGE plpgsql;
 
 CREATE TRIGGER validateEmail_cliente AFTER INSERT OR DELETE
 ON clientes FOR EACH ROW EXECUTE PROCEDURE validateEmail();
@@ -212,7 +212,7 @@ END
 $$
 LANGUAGE plpgsql;
 
-SELECT check_out(2, '2020-11-21');
+/* SELECT check_out(2, '2020-11-21'); */
 
 
 -- Reportes
@@ -241,7 +241,7 @@ END
 $$
 LANGUAGE plpgsql;
 
-select * from mostrar_habitaciones_disponibles(current_date, '2020-11-30');
+/* select * from mostrar_habitaciones_disponibles(current_date, '2020-11-30'); */
 
 -- mostra habitaciones reservadas
 
@@ -272,7 +272,7 @@ END
 $$
 LANGUAGE plpgsql;
 
-select * from habitaciones_reservadas(current_date, current_date+3);
+/* select * from habitaciones_reservadas(current_date, current_date+3); */
 
 -- mostrar cliente y el gasto total que ha realizado en el hotel
 CREATE OR REPLACE FUNCTION gasto_cliente()
@@ -296,7 +296,7 @@ END
 $$
 LANGUAGE plpgsql;
 
-SELECT * FROM gasto_cliente();
+/* SELECT * FROM gasto_cliente(); */
 
 
 -- logs 

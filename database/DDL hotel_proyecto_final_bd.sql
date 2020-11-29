@@ -19,8 +19,7 @@ CREATE TABLE public.cuentas_clientes (
     check_out date,
     monto numeric,
     pagado boolean NOT NULL,
-    reserva_id integer,
-    --servicios_consumidos_id integer
+    reserva_id integer
 );
 
 

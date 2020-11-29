@@ -34,17 +34,16 @@ INSERT INTO "nacionalidades"   VALUES ('Peru', '+51');
 INSERT INTO "nacionalidades"   VALUES ('China', '+86');
 INSERT INTO "nacionalidades"   VALUES ('Australia', '+43');
 INSERT INTO "nacionalidades"   VALUES ('Chile', '+56');
-INSERT INTO "nacionalidades"   VALUES ('Arabia Saudita', '+966');
+INSERT INTO "nacionalidades"   VALUES ('Arabia', '+966');
 INSERT INTO "nacionalidades"   VALUES ('Uruguay', '+598');
 INSERT INTO "nacionalidades"   VALUES ('España', '+34');
-INSERT INTO "nacionalidades"   VALUES ('Estados Unidos', '+1');
+INSERT INTO "nacionalidades"   VALUES ('USA', '+1');
 INSERT INTO "nacionalidades"   VALUES ('Alemania', '+49');
 INSERT INTO "nacionalidades"   VALUES ('Canada', '+1');
 INSERT INTO "nacionalidades"   VALUES ('Mexico', '+52');
 INSERT INTO "nacionalidades"   VALUES ('Brazil', '+55');
 INSERT INTO "nacionalidades"   VALUES ('India', '+91');
 INSERT INTO "nacionalidades"   VALUES ('Belgica', '+32');
-INSERT INTO "nacionalidades"   VALUES ('Nueva Zelanda', '+64');
 INSERT INTO "nacionalidades"   VALUES ('Bolivia', '+591');
 
 -- INSERT habitaciones
