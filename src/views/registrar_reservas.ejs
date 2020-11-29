@@ -4,97 +4,115 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Registrar Cliente</title>
-    <link rel="stylesheet" href="../CSS/styles.css" type="text/css">
-    <script src="https://kit.fontawesome.com/51f0d0946e.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../CSS/styles.css" type="text/css" />
+    <script
+      src="https://kit.fontawesome.com/51f0d0946e.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
-  
+
   <body>
-    
     <header>
       <div>
-        <a href="/"><img src="../resources/img/habbo.svg" alt="habbo" width="10%" height="10%"></a>
+        <a href="/"
+          ><img
+            src="../resources/img/habbo.svg"
+            alt="habbo"
+            width="10%"
+            height="10%"
+        /></a>
       </div>
     </header>
 
     <div id="div_interfaz">
-
       <form action="/registrar_reserva_habitacion" method="post">
         <h1>Reservar Habitacion</h1>
 
         <label for="cliente">cliente:</label>
-        <br>
-        <input list="cliente_id" name="var_cliente_id" id="cliente">
+        <br />
+        <input list="cliente_id" name="var_cliente_id" id="cliente" />
         <datalist id="cliente_id">
-            <% if (data_cliente) { %>
-                <% for(var i = 0; i < data_cliente.length; i++) { %>
-                    <option value=<%= data_cliente[i].cliente_id %> <label><%= data_cliente[i].nombre + " " +data_cliente[i].apellido_paterno  %></label> </option>
-                <% } %>
-            <% } %>
+          <% if (data_cliente) { %> <% for(var i = 0; i < data_cliente.length;
+          i++) { %>
+          <option value="<%" ="data_cliente[i].cliente_id" %>
+            <label
+              ><%= data_cliente[i].nombre + " "
+              +data_cliente[i].apellido_paterno %></label
+            >
+          </option>
+          <% } %> <% } %>
         </datalist>
 
-        <br>
+        <br />
 
         <label for="habitacion">habitacion:</label>
-        <br>
-        <input list="habitaciones" name=" var_numero_habitacion" id="habitacion">
+        <br />
+        <input
+          list="habitaciones"
+          name="var_numero_habitacion"
+          id="habitacion"
+        />
         <datalist id="habitaciones">
-          <% if (data_habitaciones) { %>
-            <% for(var i = 0; i < data_habitaciones.length; i++) { %>
-                <option value=<%= data_habitaciones[i].numero_habitacion %> <label><%= data_habitaciones[i].nombre_tipo_habitacion %></label></option>
-            <% } %>
-        <% } %>
+          <% if (data_habitaciones) { %> <% for(var i = 0; i <
+          data_habitaciones.length; i++) { %>
+          <option value="<%" ="data_habitaciones[i].numero_habitacion" %>
+            <label><%= data_habitaciones[i].nombre_tipo_habitacion %></label>
+          </option>
+          <% } %> <% } %>
         </datalist>
 
-        <br>
+        <br />
 
         <label>Fecha de Entrada</label>
-        <input type="date"  name="var_fecha_entrada">
+        <input type="date" name="var_fecha_entrada" />
 
-        <br>
+        <br />
 
         <label>Fecha de Salida</label>
-        <input type="date"  name="var_fecha_salida">
+        <input type="date" name="var_fecha_salida" />
 
-        <br>
+        <br />
 
-
-        <input type="submit">
-
+        <input type="submit" />
       </form>
 
       <div>
-
         <table>
-            <thead>
-              <tr>
-                <th>reserva_id</th>
-                <th>fecha_entrada</th>
-                <th>fecha_salida</th>
-                <th>precio_habitacion</th>
-                <th>cliente_id</th>
-                <th> numero_habitacion</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% if (data_reserva_habitaciones) { %>
-                <% for(var i = 0; i < data_reserva_habitaciones.length; i++) { %>
-                  <tr>
-                    <td><%= data_reserva_habitaciones[i].reserva_id %></td>
-                    <td><%= data_reserva_habitaciones[i].fecha_entrada %></td>
-                    <td><%= data_reserva_habitaciones[i].fecha_salida %></td>
-                    <td><%= data_reserva_habitaciones[i].precio_habitacion %></td>
-                    <td><%= data_reserva_habitaciones[i].cliente_id %></td>
-                    <td><%= data_reserva_habitaciones[i].numero_habitacion %></td>
-                    <td><a href="/delete_reserva_habitacion/<%= data_reserva_habitaciones[i].reserva_id %>" class="button-trash"><i class="fas fa-trash-alt"></i></a></td>
-
-                  </tr>
-                <% } %>
-              <% } %>
-            </tbody>
-          </table>
-
+          <thead>
+            <tr>
+              <th>reserva_id</th>
+              <th>fecha_entrada</th>
+              <th>fecha_salida</th>
+              <th>precio_habitacion</th>
+              <th>cliente</th>
+              <th>numero_habitacion</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% if (data_reserva_habitaciones) { %> <% for(var i = 0; i <
+            data_reserva_habitaciones.length; i++) { %>
+            <tr>
+              <td><%= data_reserva_habitaciones[i].reserva_id %></td>
+              <td><%= data_reserva_habitaciones[i].fecha_entrada %></td>
+              <td><%= data_reserva_habitaciones[i].fecha_salida %></td>
+              <td><%= data_reserva_habitaciones[i].precio_habitacion %></td>
+              <td>
+                <%= data_cliente[i].nombre + " " +
+                data_cliente[i].apellido_paterno %>
+              </td>
+              <td><%= data_reserva_habitaciones[i].numero_habitacion %></td>
+              <td>
+                <a
+                  href="/delete_reserva_habitacion/<%= data_reserva_habitaciones[i].reserva_id %>"
+                  class="button-trash"
+                  ><i class="fas fa-trash-alt"></i
+                ></a>
+              </td>
+            </tr>
+            <% } %> <% } %>
+          </tbody>
+        </table>
       </div>
     </div>
-
   </body>
 </html>
