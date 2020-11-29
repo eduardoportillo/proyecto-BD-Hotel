@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Registrar Cliente</title>
     <link rel="stylesheet" href="../CSS/styles.css" type="text/css">
-    
+    <script src="https://kit.fontawesome.com/51f0d0946e.js" crossorigin="anonymous"></script>
   </head>
   <body>
     
@@ -15,6 +15,7 @@
       </div>
     </header>
     <div id="div_interfaz">
+
       <form action="/registrar_cliente" method="post">
         <h1>Registrar Cliente</h1>
 
@@ -76,17 +77,18 @@
 
       </form>
 
-      <div class="col-md-7">
-        <table class="table table-bordered table-hover">
+      <div>
+        <table>
           <thead>
             <tr>
-              <td>cliente_id</td>
-              <td>nombre</td>
-              <td>apellido</td>
-              <td>telefono</td>
-              <td>email</td>
-              <td>direccion</td>
-              <td> pais</td>
+              <th>cliente_id</th>
+              <th>nombre</th>
+              <th>apellido</th>
+              <th>telefono</th>
+              <th>email</th>
+              <th>direccion</th>
+              <th> pais</th>
+              <th><i class="fas fa-trash-alt"></th>
             </tr>
           </thead>
           <tbody>
@@ -100,7 +102,7 @@
                   <td><%= date_clientes[i].email %></td>
                   <td><%= date_clientes[i].direccion %></td>
                   <td><%= date_clientes[i].pais %></td>
-                  <td><a href="/delete/<%= date_clientes[i].cliente_id %>">Delete</a></td>
+                  <td><a href="/delete/<%= date_clientes[i].cliente_id %>" class="button-trash"><i class="fas fa-trash-alt"></i></a></td>
                 </tr>
               <% } %>
             <% } %>
