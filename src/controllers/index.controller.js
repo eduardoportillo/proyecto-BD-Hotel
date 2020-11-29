@@ -42,13 +42,19 @@ const deleteCliente = async (req, res) => {
 
 // metodo para tabla reserva_habitacion
 
-const reserva_habitacion = async (req, res) => {
+const reservaHabitacion = async (req, res) => {
     const res_cliente = await pool.query('SELECT * FROM clientes');
-    const res_habitacion = await pool.query('SELECT * FROM reservas_habitaciones')
+    const res_reserva_habitaciones = await pool.query('SELECT * FROM reservas_habitaciones');
+    const habitaciones = await pool.query('SELECT * FROM habitaciones');
     res.render('registrar_reservas', {
         data_cliente: res_cliente.rows,
-        data_habitaciones: res_habitacion.rows
+        data_reserva_habitaciones: res_reserva_habitaciones.rows,
+        data_habitaciones: habitaciones.rows
     })
+};
+
+const registrarReservaHabitacion = async (req, res) => {
+    const query = await pool.query('');
 };
 
 module.exports = {
@@ -56,5 +62,6 @@ module.exports = {
     getClientes,
     registrarCliente,
     deleteCliente,
-    reserva_habitacion
+    reservaHabitacion,
+    registrarReservaHabitacion
 };

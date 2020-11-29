@@ -18,7 +18,7 @@
 
     <div id="div_interfaz">
 
-      <form action="/reserva_habitaciones" method="post">
+      <form action="/registrar_reserva_habitacion" method="post">
         <h1>Reservar Habitacion</h1>
 
         <label for="cliente">cliente</label>
@@ -29,6 +29,18 @@
                     <option value=<%= data_cliente[i].cliente_id %> <label><%= data_cliente[i].nombre + " " +data_cliente[i].apellido_paterno  %></label> </option>
                 <% } %>
             <% } %>
+        </datalist>
+
+        <br>
+
+        <label for="habitacion">habitacion</label>
+        <input list="habitaciones" name="habitaciones" id="habitacion">
+        <datalist id="habitaciones">
+          <% if (data_habitaciones) { %>
+            <% for(var i = 0; i < data_habitaciones.length; i++) { %>
+                <option value=<%= data_habitaciones[i].numero_habitacion %> <label><%= data_habitaciones[i].nombre_tipo_habitacion %></label></option>
+            <% } %>
+        <% } %>
         </datalist>
 
           
@@ -49,15 +61,15 @@
               </tr>
             </thead>
             <tbody>
-              <% if (data_habitaciones) { %>
-                <% for(var i = 0; i < data_habitaciones.length; i++) { %>
+              <% if (data_reserva_habitaciones) { %>
+                <% for(var i = 0; i < data_reserva_habitaciones.length; i++) { %>
                   <tr>
-                    <td><%= data_habitaciones[i].reserva_id %></td>
-                    <td><%= data_habitaciones[i].fecha_entrada %></td>
-                    <td><%= data_habitaciones[i].fecha_salida %></td>
-                    <td><%= data_habitaciones[i].precio_habitacion %></td>
-                    <td><%= data_habitaciones[i].cliente_id %></td>
-                    <td><%= data_habitaciones[i].numero_habitacion %></td>
+                    <td><%= data_reserva_habitaciones[i].reserva_id %></td>
+                    <td><%= data_reserva_habitaciones[i].fecha_entrada %></td>
+                    <td><%= data_reserva_habitaciones[i].fecha_salida %></td>
+                    <td><%= data_reserva_habitaciones[i].precio_habitacion %></td>
+                    <td><%= data_reserva_habitaciones[i].cliente_id %></td>
+                    <td><%= data_reserva_habitaciones[i].numero_habitacion %></td>
 
                   </tr>
                 <% } %>
