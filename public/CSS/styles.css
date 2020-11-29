@@ -15,12 +15,10 @@ header{
     margin: 0px;
 }
 
-#habbo.svg{
-    width: 20%; height: 10%;
-}
 
 #div_interfaz{
-
+    display: flex;
+    flex-direction: row;
     border-radius: 30px;
     margin: 30px;
     padding: 10px;
@@ -28,7 +26,7 @@ header{
 }
 
 form{
-    padding-left: 100px;
+    padding: 1%;
     align-items: center;
 
 }
@@ -38,8 +36,7 @@ label{
 }
 
 input{
-
-    margin: 5px;
+    margin: 6px;
     padding: 4px;
     border-radius: 20px;
 }
@@ -73,4 +70,3 @@ td {
     border-top: 1px solid transparent;
     padding: 8px;
 }
-
