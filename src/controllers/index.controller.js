@@ -43,13 +43,15 @@ const deleteCliente = async (req, res) => {
 // metodo para tabla reserva_habitacion
 
 const reservaHabitacion = async (req, res) => {
-    const res_cliente = await pool.query('SELECT * FROM clientes');
+    const res_cliente = await pool.query('SELECT * FROM reservas_habitaciones RH join clientes C on C.cliente_id = RH.cliente_id');
+    const get_clientes = await pool.query('SELECT * FROM clientes');
     const res_reserva_habitaciones = await pool.query('SELECT * FROM reservas_habitaciones');
     const habitaciones = await pool.query('SELECT * FROM habitaciones');
     res.render('registrar_reservas', {
         data_cliente: res_cliente.rows,
         data_reserva_habitaciones: res_reserva_habitaciones.rows,
-        data_habitaciones: habitaciones.rows
+        data_habitaciones: habitaciones.rows,
+        data_get_clientes: get_clientes.rows
     })
 };
 
@@ -66,6 +68,18 @@ const deleteReserva = async (req, res) => {
     res.redirect('/reserva_habitaciones');
 };
 
+// metodos para tabla consumo
+
+const check_in = async (req, res) => {
+    const reserva_habitaciones = await pool.query('SELECT * FROM reservas_habitaciones');
+    const res_cliente = await pool.query('SELECT * FROM clientes');
+
+    res.render('check_in-check_out', {
+        data_reserva_habitaciones: reserva_habitaciones.rows,
+        data_cliente: res_cliente.rows
+    })
+};
+
 module.exports = {
     index,
     getClientes,
@@ -73,5 +87,6 @@ module.exports = {
     deleteCliente,
     reservaHabitacion,
     registrarReservaHabitacion,
-    deleteReserva
+    deleteReserva,
+    check_in
 };
