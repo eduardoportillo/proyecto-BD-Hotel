@@ -71,13 +71,32 @@ const deleteReserva = async (req, res) => {
 // metodos para tabla consumo
 
 const check_in = async (req, res) => {
-    const reserva_habitaciones = await pool.query('SELECT * FROM reservas_habitaciones');
-    const res_cliente = await pool.query('SELECT * FROM clientes');
+    const reserva_habitaciones = await pool.query('SELECT reserva_id ,nombre, apellido_paterno FROM reservas_habitaciones RH join clientes C on RH.cliente_id = C.cliente_id');
+
+    const servicios = await pool.query('select * from servicios');
+
+    const cuentas_clientes = await pool.query('select * from cuentas_clientes');
 
     res.render('check_in-check_out', {
         data_reserva_habitaciones: reserva_habitaciones.rows,
-        data_cliente: res_cliente.rows
+        data_servicios: servicios.rows,
+        data_cuentas_clientes: cuentas_clientes.rows
     })
+};
+
+const insertar_check_in = async (req, res) => {
+    const servicios = [];
+    const {var_reserva_id, var_check_in, servicios_resividos} = req.body;
+
+    for (let i = 0; i < servicios_resividos.length; i++) {
+        servicios.push(parseInt(servicios_resividos[i]));
+        console.log('dentro del for: '+ typeof(servicios[i]), servicios[i]);
+    }
+
+    console.log(servicios);
+    const insert_check_in = await pool.query('select check_in($1, $2, $3)', [var_reserva_id, var_check_in, servicios]);
+
+    res.redirect('/chek-in_check-out');
 };
 
 module.exports = {
@@ -88,5 +107,6 @@ module.exports = {
     reservaHabitacion,
     registrarReservaHabitacion,
     deleteReserva,
-    check_in
+    check_in,
+    insertar_check_in
 };
