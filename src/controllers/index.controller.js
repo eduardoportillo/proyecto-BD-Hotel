@@ -105,6 +105,15 @@ const insert_check_out = async (req, res) => {
     res.redirect('/chek-in_check-out');
 };
 
+// tabla log
+
+const tabla_log = async (req, res) => {
+    const tabla_log = await pool.query('select * from logs');
+    res.render('tabla_log', {
+        data_tabla_log: tabla_log.rows
+    })
+};
+
 module.exports = {
     index,
     getClientes,
@@ -115,5 +124,6 @@ module.exports = {
     deleteReserva,
     check_in,
     insertar_check_in,
-    insert_check_out
+    insert_check_out,
+    tabla_log
 };

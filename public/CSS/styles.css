@@ -76,3 +76,11 @@ td {
     border-top: 1px solid transparent;
     padding: 8px;
 }
+
+#table_log th{
+    font-size: 30px;
+}
+
+#table_log td{
+    font-size: 25px;
+}
