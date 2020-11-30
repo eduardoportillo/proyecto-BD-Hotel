@@ -46,7 +46,7 @@ const reservaHabitacion = async (req, res) => {
     const res_cliente = await pool.query('SELECT * FROM reservas_habitaciones RH join clientes C on C.cliente_id = RH.cliente_id');
     const get_clientes = await pool.query('SELECT * FROM clientes');
     const res_reserva_habitaciones = await pool.query('SELECT * FROM reservas_habitaciones');
-    const habitaciones = await pool.query('SELECT * FROM habitaciones');
+    const habitaciones = await pool.query('select * from habitaciones H JOIN tipo_habitaciones TH ON H.nombre_tipo_habitacion = TH.nombre');
     res.render('registrar_reservas', {
         data_cliente: res_cliente.rows,
         data_reserva_habitaciones: res_reserva_habitaciones.rows,
@@ -75,7 +75,7 @@ const check_in = async (req, res) => {
 
     const servicios = await pool.query('select * from servicios');
 
-    const cuentas_clientes = await pool.query('select * from cuentas_clientes');
+    const cuentas_clientes = await pool.query('select * from cuentas_clientes order by cuenta_cliente_id asc');
 
     res.render('check_in-check_out', {
         data_reserva_habitaciones: reserva_habitaciones.rows,
@@ -90,11 +90,17 @@ const insertar_check_in = async (req, res) => {
 
     for (let i = 0; i < servicios_resividos.length; i++) {
         servicios.push(parseInt(servicios_resividos[i]));
-        console.log('dentro del for: '+ typeof(servicios[i]), servicios[i]);
     }
 
-    console.log(servicios);
     const insert_check_in = await pool.query('select check_in($1, $2, $3)', [var_reserva_id, var_check_in, servicios]);
+
+    res.redirect('/chek-in_check-out');
+};
+
+const insert_check_out = async (req, res) => {
+
+    const {var_reserva_id,  var_check_out} = req.body;
+    const insert_check_out = await pool.query('SELECT check_out($1, $2)', [var_reserva_id, var_check_out]);
 
     res.redirect('/chek-in_check-out');
 };
@@ -108,5 +114,6 @@ module.exports = {
     registrarReservaHabitacion,
     deleteReserva,
     check_in,
-    insertar_check_in
+    insertar_check_in,
+    insert_check_out
 };

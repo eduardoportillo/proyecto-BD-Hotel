@@ -10,7 +10,8 @@ const {
         registrarReservaHabitacion,
         deleteReserva,
         check_in,
-        insertar_check_in
+        insertar_check_in,
+        insert_check_out
     } = require('../controllers/index.controller');
 
 router.get('/', index);
@@ -25,5 +26,6 @@ router.get('/delete_reserva_habitacion/:reserva_id', deleteReserva);
 
 router.get('/chek-in_check-out', check_in);
 router.post('/insertar-check-in', insertar_check_in);
+router.post('/insertar-check-out', insert_check_out);
 
 module.exports = router;

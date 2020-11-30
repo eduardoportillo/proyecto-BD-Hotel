@@ -40,7 +40,7 @@
         <datalist id="habitaciones">
           <% if (data_habitaciones) { %>
             <% for(var i = 0; i < data_habitaciones.length; i++) { %>
-                <option value=<%= data_habitaciones[i].numero_habitacion %> <label><%= data_habitaciones[i].nombre_tipo_habitacion %></label></option>
+                <option value=<%= data_habitaciones[i].numero_habitacion %> <label><%= data_habitaciones[i].nombre_tipo_habitacion + ' ' + data_habitaciones[i].precio_habitacion + 'Bs. ' + ' Piso: ' +   data_habitaciones[i].piso %></label></option>
             <% } %>
         <% } %>
         </datalist>
