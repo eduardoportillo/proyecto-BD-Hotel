@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Check-in - check-out</title>
+    <link rel="stylesheet" href="../CSS/styles.css" type="text/css">
+    <script src="https://kit.fontawesome.com/51f0d0946e.js" crossorigin="anonymous"></script>
+  </head>
+  
+  <body>
+    
+    <header>
+      <div>
+        <a href="/"><img src="../resources/img/habbo.svg" alt="habbo" width="10%" height="10%"></a>
+      </div>
+    </header>
+
+    <div id="div_interfaz">
+     <div id="forms-checkin-check-out">
+      <form action="/insertar-check-in" method="post" id="form_check-in">
+
+        <h1>Check-in</h1>
+
+        <label for="check-in">Reserva:</label>
+        <input list="cliente_id" name="var_reserva_id" id="cliente">
+        <datalist id="cliente_id">
+            <% if (data_reserva_habitaciones) { %>
+                <% for(var i = 0; i < data_reserva_habitaciones.length; i++) { %>
+                    <option value=<%= data_reserva_habitaciones[i].reserva_id %> <label><%= data_reserva_habitaciones[i].nombre + " " + data_reserva_habitaciones[i].apellido_paterno  %></label> </option>
+                <% } %>
+            <% } %>
+        </datalist>
+
+        <br>
+
+        <label>Fecha de Check-in</label>
+        <input type="date" name="var_check_in" />
+
+        <br>
+
+        <label>Servicios: </label>
+        <br>
+        <% if (data_servicios) { %>
+            <% for(var i = 0; i < data_servicios.length; i++) { %>
+            <input type="checkbox" name="servicios_resividos" value=<%= data_servicios[i].servicio_id %>><%= data_servicios[i].nombre +' '+ data_servicios[i].precio + 'Bs.'%><br>
+            <% } %>
+        <% } %>
+
+        <br>
+
+        <input type="submit" value="check-in">
+
+      </form>
+
+      <form action="/insertar-check-out" method="POST">
+        <h1>Check_out</h1>
+
+        <label for="check-out">Reserva:</label>
+        <input list="cliente_id" name="var_reserva_id" id="cliente">
+        <datalist id="cliente_id">
+            <% if (data_reserva_habitaciones) { %>
+                <% for(var i = 0; i < data_reserva_habitaciones.length; i++) { %>
+                    <option value=<%= data_reserva_habitaciones[i].reserva_id %> <label><%= data_reserva_habitaciones[i].nombre + " " + data_reserva_habitaciones[i].apellido_paterno  %></label> </option>
+                <% } %>
+            <% } %>
+        </datalist>
+
+        <br>
+
+        <label>Fecha de Check-Out: </label>
+        <input type="date" name="var_check_out"/>
+
+        <input type="submit" value="check-out">
+
+      </form>
+
+    </div>
+
+      <div>
+        <table>
+            <thead>
+              <tr>
+                <th>cuenta_cliente_id</th>
+                <th>check_in</th>
+                <th>check_out</th>
+                <th>monto</th>
+                <th>pagado</th>
+                <th>reserva_id</th>
+                <th>cliente</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% if (data_cuentas_clientes) { %>
+                <% for(var i = 0; i < data_cuentas_clientes.length; i++) { %>
+                  <tr>
+                    <td><%= data_cuentas_clientes[i].cuenta_cliente_id %></td>
+                    <td><%= data_cuentas_clientes[i].check_in %></td>
+                    <td><%= data_cuentas_clientes[i].check_out %></td>
+                    <td><%= data_cuentas_clientes[i].monto %></td>
+                     <td><%= data_cuentas_clientes[i].pagado %></td>
+                     <td><%= data_cuentas_clientes[i].reserva_id %></td>
+                     <td><%= data_reserva_habitaciones[i].nombre + " " + data_reserva_habitaciones[i].apellido_paterno  %></td>
+                  </tr>
+                <% } %>
+              <% } %>
+            </tbody>
+          </table>
+      </div>
+      <div class="col-md-5">
+        <div class="card-body">
+    </div>
+
+  </body>
+</html>
