@@ -110,7 +110,7 @@ BEGIN
 	open cur_rango_fechas;
 	fetch cur_rango_fechas into rango_fechas;
 	
-	IF (SELECT EXISTS (select * from reservas_habitaciones)) THEN
+	IF (SELECT EXISTS (select fecha_entrada, fecha_salida from reservas_habitaciones where numero_habitacion =  var_numero_habitacion)) THEN
 		while(found) loop
 			IF var_fecha_entrada BETWEEN rango_fechas.fecha_entrada AND rango_fechas.fecha_salida
 				THEN  RAISE EXCEPTION 'esta habitacion no esta disponible en esa fecha';
@@ -136,10 +136,6 @@ BEGIN
 		values (DEFAULT, var_fecha_entrada, var_fecha_salida,var_cliente_id,var_numero_habitacion);	
 		  
 	END IF;
-	
-END
-$$
-LANGUAGE plpgsql;
 	
 END
 $$

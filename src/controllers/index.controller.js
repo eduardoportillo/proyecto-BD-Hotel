@@ -72,7 +72,7 @@ const deleteReserva = async (req, res) => {
 // metodos para tabla consumo
 
 const check_in = async (req, res) => {
-    const reserva_habitaciones = await pool.query('SELECT reserva_id ,nombre, apellido_paterno FROM reservas_habitaciones RH join clientes C on RH.cliente_id = C.cliente_id');
+    const reserva_habitaciones = await pool.query('SELECT nombre, apellido_paterno FROM reservas_habitaciones RH join clientes C on RH.cliente_id = C.cliente_id join cuentas_clientes CC on CC.reserva_id = RH.reserva_id');
 
     const servicios = await pool.query('select * from servicios');
 
