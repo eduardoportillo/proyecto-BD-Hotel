@@ -100,24 +100,46 @@ ON clientes FOR EACH ROW EXECUTE PROCEDURE validateEmail();
 CREATE OR REPLACE FUNCTION registrar_reservas_habitaciones
 (var_cliente_id int, var_numero_habitacion int, var_fecha_entrada date, var_fecha_salida date) 
 RETURNS VOID as 
-$$  
+$$ 
+DECLARE
+	rango_fechas record;
+	cur_rango_fechas cursor for (select fecha_entrada, fecha_salida from reservas_habitaciones where numero_habitacion =  var_numero_habitacion);
+	
 BEGIN
+
+	open cur_rango_fechas;
+	fetch cur_rango_fechas into rango_fechas;
 	
-	IF var_fecha_entrada < current_date then raise exception 'esa fecha ya paso';
+	IF (SELECT EXISTS (select * from reservas_habitaciones)) THEN
+		while(found) loop
+			IF var_fecha_entrada BETWEEN rango_fechas.fecha_entrada AND rango_fechas.fecha_salida
+				THEN  RAISE EXCEPTION 'esta habitacion no esta disponible en esa fecha';
+
+			ELSEIF var_fecha_salida < rango_fechas.fecha_salida then   RAISE EXCEPTION 'esta habtacion sigue reservada';
+
+			ELSEIF var_fecha_entrada < current_date then   RAISE EXCEPTION 'esa fecha ya paso';
+
+			ELSEIF var_fecha_salida <= var_fecha_entrada 
+				then  RAISE EXCEPTION 'la fecha de salida es anterior que la de entrada o es el mismo dia';
+
+			ELSE 
+				insert into reservas_habitaciones(reserva_id, fecha_entrada, fecha_salida, cliente_id, numero_habitacion) 
+				values (DEFAULT, var_fecha_entrada, var_fecha_salida,var_cliente_id,var_numero_habitacion);
+
+			END IF;
+
+			fetch cur_rango_fechas into rango_fechas;
+		end loop;
 	
-	ELSEIF var_fecha_salida <= var_fecha_entrada 
-	then raise exception 'la fecha de salida es anterior que la de entrada o es el mismo dia';
-	
-	ELSEIF var_fecha_entrada = (SELECT fecha_entrada from reservas_habitaciones 
-								 WHERE fecha_entrada = var_fecha_entrada AND numero_habitacion = var_numero_habitacion) 
-								 THEN raise exception 'esa habitacione ya esta ocupada';	
-								 
-	ELSE 
-	
-	insert into reservas_habitaciones(reserva_id, fecha_entrada, fecha_salida, cliente_id, numero_habitacion) 
-	values (DEFAULT, var_fecha_entrada, var_fecha_salida,var_cliente_id,var_numero_habitacion);
-	
+	ELSE
+		insert into reservas_habitaciones(reserva_id, fecha_entrada, fecha_salida, cliente_id, numero_habitacion) 
+		values (DEFAULT, var_fecha_entrada, var_fecha_salida,var_cliente_id,var_numero_habitacion);	
+		  
 	END IF;
+	
+END
+$$
+LANGUAGE plpgsql;
 	
 END
 $$

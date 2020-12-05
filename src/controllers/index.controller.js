@@ -12,6 +12,7 @@ const index = async (req, res) => {
     return res.render('index');
 };
 
+
 // metodos para tabla clientes
 const getClientes = async (req, res) => {
     const query = 'SELECT * FROM clientes';
@@ -45,7 +46,7 @@ const deleteCliente = async (req, res) => {
 const reservaHabitacion = async (req, res) => {
     const res_cliente = await pool.query('SELECT * FROM reservas_habitaciones RH join clientes C on C.cliente_id = RH.cliente_id');
     const get_clientes = await pool.query('SELECT * FROM clientes');
-    const res_reserva_habitaciones = await pool.query('SELECT * FROM reservas_habitaciones');
+    const res_reserva_habitaciones = await pool.query('SELECT * FROM reservas_habitaciones order by reserva_id ASC');
     const habitaciones = await pool.query('select * from habitaciones H JOIN tipo_habitaciones TH ON H.nombre_tipo_habitacion = TH.nombre');
     res.render('registrar_reservas', {
         data_cliente: res_cliente.rows,
