@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registrar Reservas</title>
+    <link rel="stylesheet" href="../CSS/styles.css" type="text/css">
+    <script src="https://kit.fontawesome.com/51f0d0946e.js" crossorigin="anonymous"></script>
+  </head>
+  
+  <body>
+    
+    <header>
+      <div>
+        <a href="/"><img src="../resources/img/habbo.svg" alt="habbo" width="10%" height="10%"></a>
+      </div>
+    </header>
+
+    <div id="div_interfaz">
+
+        <table id="table_log">
+            <thead>
+              <tr>
+                <th>id_log</th>
+                <th>origen</th>
+                <th>operacion</th>
+                <th>fecha</th>
+                <th>usuario</th>
+                <th>ip</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% if (data_tabla_log) { %>
+                <% for(var i = 0; i < data_tabla_log.length; i++) { %>
+                  <tr>
+                    <td><%= data_tabla_log[i].id_log %></td>
+                    <td><%= data_tabla_log[i].origen %></td>
+                    <td><%= data_tabla_log[i].operacion %></td>
+                    <td><%= data_tabla_log[i].fecha %></td>
+                    <td><%= data_tabla_log[i].usuario  %></td>
+                    <td><%= data_tabla_log[i].ip %></td>
+
+                  </tr>
+                <% } %>
+              <% } %>
+            </tbody>
+        </table>
+
+      </div>
+    </div>
+
+  </body>
+</html>
